@@ -1,5 +1,4 @@
 import logging
-import shelve
 
 import discord
 from discord.ext import commands
@@ -12,10 +11,8 @@ pacts = (
 
 
 class SCROTUS(commands.Bot):
-    def __init__(self, db: shelve.DbfilenameShelf):
+    def __init__(self):
         super().__init__(command_prefix=commands.when_mentioned_or("!"))
-
-        self.db = db
 
         for pact in pacts:
             try:
