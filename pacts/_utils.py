@@ -1,3 +1,5 @@
+import re
+
 PRONOUNS = [
     "they/them",
     "she/her",
@@ -5,3 +7,5 @@ PRONOUNS = [
     "they/she",
     "they/he",
 ]
+
+PRONOUN_RE = re.compile(r"\w+\/\w+")
