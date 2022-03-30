@@ -34,7 +34,7 @@ class Pronouns(commands.Cog):
             await g.create_role(name=r)
             created += 1
 
-        await ctx.reply(f"Initialized pronoun roles; {existing} existing; {created} created")
+        return await ctx.reply(f"Initialized pronoun roles; {existing} existing; {created} created")
 
     @commands.bot_has_permissions(manage_roles=True)
     @pronouns.command()
@@ -53,6 +53,21 @@ class Pronouns(commands.Cog):
 
         await ctx.author.remove_roles(role)
         return await ctx.reply(f"Thou no longer bears the brand of `{role.name}`")
+
+    @pronouns.command()
+    async def list(self, ctx: commands.Context):
+        g = self.bot.get_guild(ctx.guild.id)
+        roles = [r for r in g.roles if PRONOUN_RE.match(r.name)]
+
+        prns = ""
+        if len(roles) > 0:
+            for r in roles:
+                prns += f"{r.name}, "
+            prns = prns[:-2]
+        else:
+            prns = "none"
+
+        return await ctx.reply(f"Pronouns: {prns}")
 
 
 def setup(bot):
