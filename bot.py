@@ -12,7 +12,7 @@ pacts = (
 
 
 class SCROTUS(commands.Bot):
-    def __init__(self, db: shelve.Shelf):
+    def __init__(self, db: shelve.DbfilenameShelf):
         super().__init__(command_prefix=commands.when_mentioned_or("!"))
 
         self.db = db
