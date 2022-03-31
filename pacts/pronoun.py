@@ -41,7 +41,7 @@ class Pronoun(commands.Cog):
             return
 
         await ctx.author.add_roles(role)
-        return await ctx.reply(f"Thou hath been branded `{role.name}`")
+        return await ctx.reply(f"You now have the `{role.name}` role")
 
     @commands.bot_has_permissions(manage_roles=True)
     @pronoun.command()
@@ -50,7 +50,7 @@ class Pronoun(commands.Cog):
             return
 
         await ctx.author.remove_roles(role)
-        return await ctx.reply(f"Thou no longer bears the brand of `{role.name}`")
+        return await ctx.reply(f"You no longer have the `{role.name}` role")
 
     @pronoun.command()
     async def list(self, ctx: commands.Context):

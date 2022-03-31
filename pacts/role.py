@@ -33,7 +33,7 @@ class Role(commands.Cog):
             return await ctx.reply("Cannot find role")
 
         await role.edit(name=name, reason="Command requested")
-        return await ctx.reply(f"Thou hast been declared: {name}")
+        return await ctx.reply(f"Your role's been changed to `{name}`, for some reason....")
 
     @role.command()
     @commands.bot_has_permissions(manage_roles=True)
@@ -48,7 +48,7 @@ class Role(commands.Cog):
         color = int(hex, 16)
 
         await role.edit(color=color)
-        return await ctx.reply("Thou pigment hath been altered")
+        return await ctx.reply("Color has been changed, numbnuts")
 
 
 def setup(bot):
