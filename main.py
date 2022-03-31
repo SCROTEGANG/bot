@@ -1,20 +1,22 @@
 import asyncio
+import logging
 
 from bot import SCROTUS
 import config
 
 
-def main():
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
+
+
+async def main():
     b = SCROTUS()
-    loop = asyncio.get_event_loop()
 
     try:
-        loop.run_until_complete(b.start(config.TOKEN))
+        await b.start(config.TOKEN)
     except KeyboardInterrupt:
-        loop.run_until_complete(b.close())
-    finally:
-        loop.close()
+        await b.close()
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
