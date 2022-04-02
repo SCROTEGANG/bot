@@ -19,7 +19,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Build Image
-      run: docker build --file Dockerfile --tag bot:latest .
+      run: docker build --tag bot:latest .
     
     - name: Push to GitHub
       if: ${{ github.repository == 'SCROTEGANG/bot' && github.event_name == 'push' && github.ref == 'refs/heads/trunk' }}
