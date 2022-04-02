@@ -9,7 +9,9 @@ on:
       - trunk
 
 jobs:
-  lint:
+  build:
+    runs-on: ubuntu-latest
+    steps:
     - name: Turnstyle
       if: ${{ github.event_name == 'push' && github.ref == 'refs/head/trunk' }}
       uses: softprops/turnstyle@v1
