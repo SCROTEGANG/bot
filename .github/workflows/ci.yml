@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - trunk
+  pull_request:
+    branches:
+      - trunk
+
+jobs:
+  lint:
+    - name: Turnstyle
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/head/trunk' }}
+      uses: softprops/turnstyle@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Build Image
+      run: docker build --file Dockerfile --tag bot:latest .
+    
+    - name: Push to GitHub
+      if: ${{ github.repository == 'SCROTEGANG/bot' && github.event_name == 'push' && github.ref == 'refs/heads/trunk' }}
+      run: |
+        echo '${{ secrets.GITHUB_TOKEN }}' | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+        docker tag bot:latest ghcr.io/SCROTEGANG/bot:latest
+        docker push ghcr.io/SCROTEGANG/bot:latest
