@@ -1,8 +1,8 @@
+import os
 import asyncio
 import logging
 
 from bot import SCROTUS
-import config
 
 
 logging.basicConfig(level=logging.INFO)
@@ -12,8 +12,13 @@ log = logging.getLogger(__name__)
 async def main():
     b = SCROTUS()
 
+    token = os.getenv("SCROTUS_TOKEN")
+    if token is None:
+        log.fatal("$SCROTUS_TOKEN was not specified")
+        return
+
     try:
-        await b.start(config.TOKEN)
+        await b.start(token)
     except KeyboardInterrupt:
         await b.close()
 
