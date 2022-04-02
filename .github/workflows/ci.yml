@@ -24,8 +24,8 @@ jobs:
       run: docker build --tag bot:latest .
     
     - name: Push to GitHub
-      if: ${{ github.repository == 'SCROTEGANG/bot' && github.event_name == 'push' && github.ref == 'refs/heads/trunk' }}
+      if: ${{ github.repository == 'scrotegang/bot' && github.event_name == 'push' && github.ref == 'refs/heads/trunk' }}
       run: |
         echo '${{ secrets.GITHUB_TOKEN }}' | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
-        docker tag bot:latest ghcr.io/SCROTEGANG/bot:latest
-        docker push ghcr.io/SCROTEGANG/bot:latest
+        docker tag bot:latest ghcr.io/scrotegang/bot:latest
+        docker push ghcr.io/scrotegang/bot:latest
