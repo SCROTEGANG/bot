@@ -1,7 +1,6 @@
 import logging
 
 import discord
-import asyncpg
 from discord.ext import commands
 
 log = logging.getLogger(__name__)
@@ -12,17 +11,8 @@ pacts = (
 
 
 class SCROTUS(commands.Bot):
-    conn: asyncpg.Connection
-    opts: dict
-
-    def __init__(self, opts: dict, conn: asyncpg.Connection):
-        super().__init__(
-            command_prefix=commands.when_mentioned_or("!"),
-            description="A very specialized general-purpose bot for SCROTEGANG",
-        )
-
-        self.conn = conn
-        self.opts = opts
+    def __init__(self):
+        super().__init__(command_prefix=commands.when_mentioned_or("!"))
 
         for pact in pacts:
             try:

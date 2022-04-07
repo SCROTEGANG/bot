@@ -17,24 +17,22 @@ class Pronoun(commands.Cog):
     @commands.bot_has_permissions(manage_roles=True)
     @pronoun.command()
     async def init(self, ctx: commands.Context):
-        roles = await self.bot.conn.fetch("SELECT pronoun FROM pronouns WHERE guild_id = $1", ctx.guild.id)
-
-        needed = []
-        if len(roles) == 0:
-            needed = PRONOUNS.copy()
-        else:
-            needed = []
-            for r in roles:
-                if r["pronoun"] in PRONOUNS:
-                    continue
-                needed.append(r["pronoun"].lower())
-
-        existing = len([r for r in roles if r["pronoun"] in PRONOUNS])
+        g: discord.Guild = self.bot.get_guild(ctx.guild.id)
+        existing = len([r for r in g.roles if r.name in PRONOUNS])
         created = 0
-        g: discord.Guild = ctx.bot.get_guild(ctx.guild.id)
-        for n in needed:
-            await g.create_role(name=n.lower(), reason=f"Requested by {ctx.author.mention}")
 
+        not_needed = []
+        for r in PRONOUNS:
+            for gr in g.roles:
+                if r == gr.name:
+                    not_needed.append(r)
+
+        roles = [r for r in PRONOUNS if r not in not_needed]
+        for r in roles:
+            await g.create_role(name=r)
+            created += 1
+
+        return await ctx.reply(f"Initialized pronoun roles; {existing} existing; {created} created")
 
     @commands.bot_has_permissions(manage_roles=True)
     @pronoun.command()
