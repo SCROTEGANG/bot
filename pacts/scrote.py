@@ -6,8 +6,9 @@ EGO_THINGS = ["pussy", "cunnilingus"]
 IMAGES = {
     "ego": "egopussy.png"
 }
-
 IMAGES_BASE = "https://holedaemon.net/images/"
+
+SCROTE_ID = 151516182439133184
 
 
 class Scrote(commands.Cog):
@@ -16,6 +17,9 @@ class Scrote(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, m: discord.Message):
+        if m.id != SCROTE_ID:
+            return
+
         check = any(s in m.content.lower() for s in EGO_NAMES) and any(s in m.content.lower() for s in EGO_THINGS)
         if check:
             await m.reply(IMAGES_BASE + IMAGES["ego"])
