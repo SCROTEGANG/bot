@@ -7,7 +7,8 @@ from discord.ext import commands
 log = logging.getLogger(__name__)
 pacts = (
     "pacts.pronoun",
-    "pacts.tags"
+    "pacts.tags",
+    "pacts.scrote",
 )
 
 
