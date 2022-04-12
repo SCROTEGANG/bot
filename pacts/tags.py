@@ -1,9 +1,15 @@
 from discord.ext import commands
+from asyncpg.exceptions import UndefinedTableError
 
 
 class Tags(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx: commands.Context, err):
+        if isinstance(err.original, UndefinedTableError):
+            return await ctx.reply("Database has not been properly configured; missing `tags` table.")
 
     async def _get_tag(self, ctx: commands.Context, name: str):
         tag = await self.bot.conn.fetchrow(
