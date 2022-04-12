@@ -1,18 +1,21 @@
 import logging
 
+import asyncpg
 import discord
 from discord.ext import commands
 
 log = logging.getLogger(__name__)
 pacts = (
     "pacts.pronoun",
-    # "pacts.role"
+    "pacts.tags"
 )
 
 
 class SCROTUS(commands.Bot):
-    def __init__(self):
+    def __init__(self, conn: asyncpg.Connection):
         super().__init__(command_prefix=commands.when_mentioned_or("!"))
+
+        self.conn = conn
 
         for pact in pacts:
             try:
