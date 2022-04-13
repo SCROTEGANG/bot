@@ -17,7 +17,7 @@ class Scrote(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, m: discord.Message):
-        if m.id != SCROTE_ID:
+        if m.guild.id != SCROTE_ID:
             return
 
         check = any(s in m.content.lower() for s in EGO_NAMES) and any(s in m.content.lower() for s in EGO_THINGS)
