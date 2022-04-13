@@ -1,13 +1,19 @@
-FROM python:latest
+FROM python:alpine
 
-WORKDIR /bot
+RUN pip install --upgrade pip
 
-RUN pip install --no-cache-dir pipenv
+RUN adduser -D bot
+USER bot
+WORKDIR /home/bot
 
-COPY ./Pipfile ./Pipfile.lock ./
+RUN pip install --user --no-cache-dir pipenv
 
-RUN pipenv install --system
+ENV PATH="/home/bot/.local/bin:${PATH}"
 
-COPY ./ ./
+COPY --chown=bot:bot Pipfile Pipfile
+RUN pipenv lock -r > requirements.txt
+RUN pip install --user -r requirements.txt
 
-CMD ["python", "main.py"]
+COPY --chown=bot:bot . .
+
+CMD [ "python", "main.py" ]
