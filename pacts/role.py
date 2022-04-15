@@ -3,7 +3,7 @@ from typing import Optional
 import discord
 from discord.ext import commands
 
-from ._utils import PRONOUN_RE
+from .utils._utils import PRONOUN_RE
 
 
 class Role(commands.Cog):

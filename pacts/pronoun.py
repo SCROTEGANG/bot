@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from ._utils import PRONOUNS, PRONOUN_RE
+from .utils._utils import PRONOUNS, PRONOUN_RE
 
 
 class Pronoun(commands.Cog):

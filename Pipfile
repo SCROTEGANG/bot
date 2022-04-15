@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 discord = "*"
 asyncpg = "*"
+tortoise-orm = "*"
 
 [dev-packages]
 black = "*"

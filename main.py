@@ -2,7 +2,7 @@ import os
 import asyncio
 import logging
 
-import asyncpg
+from tortoise import Tortoise
 from bot import SCROTUS
 
 
@@ -21,8 +21,13 @@ async def main():
         log.fatal("$SCROTUS_DSN was not specified")
         return
 
-    conn = await asyncpg.connect(dsn=dsn)
-    b = SCROTUS(conn)
+    await Tortoise.init(
+        db_url=dsn,
+        modules={"models": ["pacts.utils.db"]}
+    )
+    await Tortoise.generate_schemas()
+
+    b = SCROTUS()
 
     try:
         await b.start(token)
