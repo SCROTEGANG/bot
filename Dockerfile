@@ -1,5 +1,8 @@
 FROM python:alpine
 
+RUN apk update
+RUN apk add git
+
 RUN pip install --upgrade pip
 
 RUN adduser -D bot
