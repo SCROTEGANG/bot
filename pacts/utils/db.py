@@ -17,3 +17,12 @@ class Tag(Model):
 
     def __str__(self):
         return self.tag_name
+
+
+class EgoraptorTimestamp(Model):
+    id = fields.BigIntField(pk=True)
+    guild_id = fields.CharField(unique=True, max_length=20)
+    last_timestamp = fields.DatetimeField()
+
+    class Meta:
+        table = "egoraptor_timestamps"
