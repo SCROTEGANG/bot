@@ -14,8 +14,7 @@ RUN pip install --user --no-cache-dir pipenv
 ENV PATH="/home/bot/.local/bin:${PATH}"
 
 COPY --chown=bot:bot Pipfile Pipfile
-RUN pipenv lock -r > requirements.txt
-RUN pip install --user -r requirements.txt
+RUN pipenv install
 
 COPY --chown=bot:bot . .
 
