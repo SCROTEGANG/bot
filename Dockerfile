@@ -1,21 +1,20 @@
 FROM python:alpine
 
-RUN apk update
+RUN apk --no-cache upgrade
 RUN apk add git
 
 RUN pip install --upgrade pip
 
-RUN adduser -D bot
-USER bot
-WORKDIR /home/bot
+RUN adduser -D dilf
+USER dilf
+WORKDIR /home/dilf
 
-RUN pip install --user --no-cache-dir pipenv
+RUN pip install --user pipenv
+ENV PATH="/home/dilf/.local/bin:${PATH}"
 
-ENV PATH="/home/bot/.local/bin:${PATH}"
-
-COPY --chown=bot:bot ./Pipfile ./Pipfile
+COPY --chown=dilf:dilf ./Pipfile ./Pipfile.lock ./
 RUN pipenv install --system
 
-COPY --chown=bot:bot ./ ./
+COPY --chown=dilf:dilf ./ ./
 
 CMD [ "python", "main.py" ]
