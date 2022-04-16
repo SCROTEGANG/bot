@@ -1,4 +1,4 @@
-![Urinal](/.github/urinal.png)
+![Urinal](/.github/DILF.png)
 
 # Bot
 
