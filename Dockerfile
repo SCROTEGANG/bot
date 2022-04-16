@@ -13,9 +13,9 @@ RUN pip install --user --no-cache-dir pipenv
 
 ENV PATH="/home/bot/.local/bin:${PATH}"
 
-COPY --chown=bot:bot Pipfile Pipfile
+COPY --chown=bot:bot ./Pipfile ./Pipfile
 RUN pipenv install --system
 
-COPY --chown=bot:bot . .
+COPY --chown=bot:bot ./ ./
 
 CMD [ "python", "main.py" ]
