@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-discord = "*"
-asyncpg = "*"
 tortoise-orm = "*"
+"discord.py" = {editable = true, git = "https://github.com/rapptz/discord.py.git"}
+asyncpg = "*"
 
 [dev-packages]
 black = "*"

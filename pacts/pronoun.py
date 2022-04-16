@@ -68,5 +68,5 @@ class Pronoun(commands.Cog):
         return await ctx.reply(f"Pronouns: {prns}")
 
 
-def setup(bot):
-    bot.add_cog(Pronoun(bot))
+async def setup(bot):
+    await bot.add_cog(Pronoun(bot))

@@ -98,5 +98,5 @@ class Tags(commands.Cog):
             return await ctx.reply("You lack the rights to rename that tag")
 
 
-def setup(bot):
-    bot.add_cog(Tags(bot))
+async def setup(bot):
+    await bot.add_cog(Tags(bot))

@@ -29,10 +29,8 @@ async def main():
 
     b = SCROTUS()
 
-    try:
+    async with b:
         await b.start(token)
-    except KeyboardInterrupt:
-        await b.close()
 
 
 if __name__ == "__main__":

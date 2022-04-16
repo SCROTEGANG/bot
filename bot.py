@@ -13,11 +13,15 @@ pacts = (
 
 class SCROTUS(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix=commands.when_mentioned_or("!"))
+        super().__init__(
+            command_prefix=commands.when_mentioned_or("!"),
+            intents=discord.Intents.all()
+        )
 
+    async def setup_hook(self) -> None:
         for pact in pacts:
             try:
-                self.load_extension(pact)
+                await self.load_extension(pact)
             except commands.ExtensionError as e:
                 log.error(f"error loading extension: {e}")
 
