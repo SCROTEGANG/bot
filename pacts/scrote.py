@@ -42,6 +42,11 @@ class Scrote(commands.Cog):
                 + "\n\n" + IMAGES_BASE + IMAGES["ego"]
             )
 
+            timestamp.update_from_dict({
+                "last_timestamp": datetime.utcnow(),
+            })
+            await timestamp.save()
+
 
 async def setup(bot):
     await bot.add_cog(Scrote(bot))
