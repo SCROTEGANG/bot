@@ -11,7 +11,9 @@ class Meta(commands.Cog):
 
     @commands.command()
     async def game(self, ctx: commands.Context, *, new_game: str):
-        if self.last_change is not None:
+        owner = await self.bot.is_owner(ctx.author)
+
+        if self.last_change is not None and not owner:
             last = datetime.datetime.now() - self.last_change
             then = self.last_change + datetime.timedelta(hours=1)
 
