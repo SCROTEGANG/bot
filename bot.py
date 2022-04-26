@@ -8,6 +8,7 @@ pacts = (
     "pacts.pronoun",
     "pacts.tags",
     "pacts.scrote",
+    "pacts.meta",
 )
 
 
