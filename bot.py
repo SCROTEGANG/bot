@@ -12,7 +12,9 @@ pacts = (
 )
 
 
-class SCROTUS(commands.Bot):
+class DILF(commands.Bot):
+    """DILF, the revolutionary Discord bot, made specifically for SCROTEGANG."""
+
     def __init__(self):
         super().__init__(
             command_prefix=commands.when_mentioned_or("!"),

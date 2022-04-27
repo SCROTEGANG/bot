@@ -8,6 +8,8 @@ log = logging.getLogger(__name__)
 
 
 class Tags(commands.Cog):
+    """Commands pertaining to tags; think of them like robotic sticky notes."""
+
     def __init__(self, bot):
         self.bot = bot
 

@@ -5,6 +5,8 @@ from .utils._utils import PRONOUNS, PRONOUN_RE
 
 
 class Pronoun(commands.Cog):
+    """Commands for managing pronoun roles."""
+
     def __init__(self, bot):
         self.bot = bot
 

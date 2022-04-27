@@ -18,6 +18,8 @@ TEST_ID = 779875531712757800
 
 
 class Scrote(commands.Cog):
+    """Unfortunate functionality specific to SCROTEGANG."""
+
     def __init__(self, bot):
         self.bot = bot
 

@@ -3,7 +3,7 @@ import asyncio
 import logging
 
 from tortoise import Tortoise
-from bot import SCROTUS
+from bot import DILF
 
 
 logging.basicConfig(level=logging.INFO)
@@ -27,7 +27,7 @@ async def main():
     )
     await Tortoise.generate_schemas()
 
-    b = SCROTUS()
+    b = DILF()
 
     async with b:
         await b.start(token)

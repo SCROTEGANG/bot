@@ -5,6 +5,8 @@ import discord
 
 
 class Meta(commands.Cog):
+    """Commands pertaining to the bot itself."""
+
     def __init__(self, bot):
         self.bot = bot
         self.last_change = None
