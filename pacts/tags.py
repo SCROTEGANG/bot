@@ -1,6 +1,5 @@
 import logging
 
-from tortoise import exceptions
 from discord.ext import commands
 
 from .utils.db import Tag
@@ -11,13 +10,6 @@ log = logging.getLogger(__name__)
 class Tags(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-    @commands.Cog.listener()
-    async def on_command_error(self, ctx: commands.Context, err):
-        log.error(f"error during command: {err}")
-
-        if isinstance(err.original, exceptions.IntegrityError):
-            return await ctx.reply("A database error has occurred.")
 
     @commands.group(aliases=["tag"])
     async def tags(self, ctx: commands.Context):
