@@ -1,5 +1,6 @@
 import logging
 
+import aiohttp
 import discord
 from discord.ext import commands
 
@@ -9,6 +10,7 @@ pacts = (
     "pacts.tags",
     "pacts.scrote",
     "pacts.meta",
+    "pacts.jerkcity",
 )
 
 
@@ -22,14 +24,20 @@ class DILF(commands.Bot):
         )
 
     async def setup_hook(self) -> None:
+        self.session = aiohttp.ClientSession()
+
         for pact in pacts:
             try:
                 await self.load_extension(pact)
             except commands.ExtensionError as e:
                 log.error(f"error loading extension: {e}")
 
-    async def on_message(self, msg: discord.Message):
+    async def on_message(self, msg: discord.Message) -> None:
         if msg.author.bot:
             return
 
         await self.process_commands(msg)
+
+    async def close(self) -> None:
+        await super().close()
+        await self.session.close()
