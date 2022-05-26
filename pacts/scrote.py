@@ -1,3 +1,6 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
 from datetime import datetime, timezone
 
 from discord.ext import commands
@@ -5,6 +8,10 @@ import discord
 
 from .utils.db import EgoraptorTimestamp
 from .utils._utils import delta_to_human
+
+if TYPE_CHECKING:
+    from bot import DILF
+
 
 EGO_NAMES = ["egoraptor", "arin", "arin hanson"]
 EGO_THINGS = ["pussy", "cunnilingus"]
@@ -20,8 +27,8 @@ TEST_ID = 779875531712757800
 class Scrote(commands.Cog):
     """Unfortunate functionality specific to SCROTEGANG."""
 
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, bot: DILF):
+        self.bot: DILF = bot
 
     @commands.Cog.listener()
     async def on_message(self, m: discord.Message):
@@ -50,5 +57,5 @@ class Scrote(commands.Cog):
             await timestamp.save()
 
 
-async def setup(bot):
+async def setup(bot: DILF):
     await bot.add_cog(Scrote(bot))

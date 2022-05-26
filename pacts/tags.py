@@ -1,3 +1,5 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import logging
 
 from discord.ext import commands
@@ -6,12 +8,15 @@ from .utils.db import Tag
 
 log = logging.getLogger(__name__)
 
+if TYPE_CHECKING:
+    from bot import DILF
+
 
 class Tags(commands.Cog):
     """Commands pertaining to tags; think of them like robotic sticky notes."""
 
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, bot: DILF):
+        self.bot: DILF = bot
 
     @commands.group(aliases=["tag"])
     async def tags(self, ctx: commands.Context):
@@ -92,5 +97,5 @@ class Tags(commands.Cog):
             return await ctx.reply("You lack the rights to rename that tag")
 
 
-async def setup(bot):
+async def setup(bot: DILF):
     await bot.add_cog(Tags(bot))

@@ -8,10 +8,8 @@ import logging
 from discord.ext import commands
 import discord
 
-
 if TYPE_CHECKING:
     from bot import DILF
-
 
 log = logging.getLogger(__name__)
 JERKCITY_ROOT_URL = "https://bonequest.com/api/v2"
@@ -55,7 +53,7 @@ class JerkcityEpisode:
 
 
 class Jerkcity(commands.Cog):
-    """Cog for interacting with Jerkcity/Bonequest."""
+    """Commands for interacting with Jerkcity/Bonequest."""
 
     def __init__(self, bot: DILF):
         self.bot: DILF = bot

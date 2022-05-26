@@ -1,14 +1,19 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import datetime
 
 from discord.ext import commands
 import discord
 
+if TYPE_CHECKING:
+    from bot import DILF
+
 
 class Meta(commands.Cog):
     """Commands pertaining to the bot itself."""
 
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, bot: DILF):
+        self.bot: DILF = bot
         self.last_change = None
 
     @commands.command()
@@ -30,5 +35,5 @@ class Meta(commands.Cog):
         self.last_change = datetime.datetime.now()
 
 
-async def setup(bot):
+async def setup(bot: DILF):
     await bot.add_cog(Meta(bot))

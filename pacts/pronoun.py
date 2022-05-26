@@ -1,14 +1,20 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
 import discord
 from discord.ext import commands
 
 from .utils._utils import PRONOUNS, PRONOUN_RE
 
+if TYPE_CHECKING:
+    from bot import DILF
+
 
 class Pronoun(commands.Cog):
     """Commands for managing pronoun roles."""
 
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, bot: DILF):
+        self.bot: DILF = bot
 
     @commands.group(aliases=["pronouns"])
     async def pronoun(self, ctx: commands.Context):
@@ -70,5 +76,5 @@ class Pronoun(commands.Cog):
         return await ctx.reply(f"Pronouns: {prns}")
 
 
-async def setup(bot):
+async def setup(bot: DILF):
     await bot.add_cog(Pronoun(bot))
