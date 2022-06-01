@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, Dict, List
 from urllib.parse import quote_plus
 from itertools import islice
+from zoneinfo import ZoneInfo
 import datetime
 import logging
 
@@ -40,7 +41,7 @@ class JerkcityEpisode:
         self.year: int = data.get("year")
 
     def to_embed(self) -> discord.Embed:
-        dt = datetime.datetime(year=self.year, month=self.month, day=self.day)
+        dt = datetime.datetime(year=self.year, month=self.month, day=self.day, tzinfo=ZoneInfo("America/Los_Angeles"))
 
         e = discord.Embed(
             title=f"{self.title}",
