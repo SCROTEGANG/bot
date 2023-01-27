@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
+from io import BytesIO
 from datetime import datetime, timezone
 
 from discord.ext import commands
@@ -15,13 +16,13 @@ if TYPE_CHECKING:
 
 EGO_NAMES = ["egoraptor", "arin", "arin hanson"]
 EGO_THINGS = ["pussy", "cunnilingus"]
-IMAGES = {
-    "ego": "egopussy.png"
-}
-IMAGES_BASE = "https://holedaemon.net/images/"
-
-SCROTE_ID = 151516182439133184
-TEST_ID = 779875531712757800
+IMAGE = "https://holedaemon.net/images/egopussy.png"
+VALID_GUILDS = [
+    # SCROTEGANG
+    151516182439133184,
+    # Testing
+    779875531712757800
+]
 
 
 class Scrote(commands.Cog):
@@ -29,13 +30,14 @@ class Scrote(commands.Cog):
 
     def __init__(self, bot: DILF):
         self.bot: DILF = bot
+        self.image = None
 
     @commands.Cog.listener()
     async def on_message(self, m: discord.Message):
         if m.author.bot:
             return
 
-        if m.guild.id != SCROTE_ID and m.guild.id != TEST_ID:
+        if m.guild.id not in VALID_GUILDS:
             return
 
         check = any(s in m.content.lower() for s in EGO_NAMES) and any(s in m.content.lower() for s in EGO_THINGS)
@@ -46,9 +48,19 @@ class Scrote(commands.Cog):
 
             delta = datetime.now(timezone.utc) - timestamp.last_timestamp
 
+            if self.image is None:
+                async with self.bot.session.get(IMAGE) as resp:
+                    self.image = await resp.read()
+
+            file = discord.File(
+                BytesIO(self.image),
+                "egopussy.png",
+                spoiler=False,
+                description="A sign from Spongebob Squarepants labeled \"0 days since last mention of egoraptor eating pussy\"",  # noqa: E501
+            )
             await m.reply(
-                f"It has been {delta_to_human(delta)} since the last mention of egoraptor eating pussy"
-                + "\n\n" + IMAGES_BASE + IMAGES["ego"]
+                f"It has been {delta_to_human(delta)} since the last mention of egoraptor eating pussy",
+                file=file,
             )
 
             timestamp.update_from_dict({
