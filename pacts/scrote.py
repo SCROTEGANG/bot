@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 
 EGO_NAMES = ["egoraptor", "arin", "arin hanson"]
-EGO_THINGS = ["pussy", "cunnilingus"]
+EGO_THINGS = ["pussy", "cunnilingus", "vagina", "cunt"]
 IMAGE = "https://holedaemon.net/images/egopussy.png"
 VALID_GUILDS = [
     # SCROTEGANG
