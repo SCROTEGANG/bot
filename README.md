@@ -1,3 +1,5 @@
+# DILF has been deprecated in favor of [bot2](https://github.com/holedaemon/bot2).
+
 ![Urinal](/.github/DILF.png)
 
 # Bot
